@@ -1,0 +1,26 @@
+{
+  "name": "gissue",
+  "version": "0.0.1",
+  "description": "Gissue is a software to help you while you're developing awesome softwares.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yoannfleurydev/gissue.git"
+  },
+  "keywords": [
+    "git",
+    "issue",
+    "gitlab",
+    "github",
+    "redmine"
+  ],
+  "author": "Yoann Fleury <yoann.fleury@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoannfleurydev/gissue/issues"
+  },
+  "homepage": "https://github.com/yoannfleurydev/gissue#readme"
+}
