@@ -4,6 +4,7 @@
   "description": "Gissue is a software to help you while you're developing awesome softwares.",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/yoannfleurydev/gissue/issues"
   },
-  "homepage": "https://github.com/yoannfleurydev/gissue#readme"
+  "homepage": "https://github.com/yoannfleurydev/gissue#readme",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "nodegit": "^0.18.3"
+  },
+  "devDependencies": {
+    "@types/nodegit": "^0.18.0"
+  }
 }

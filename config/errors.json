@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "key": "NOT_A_GIT_REPOSITORY",
+      "code": "000",
+      "message": "This is not a git repository"
+    }
+  ]
+}
