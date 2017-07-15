@@ -17,6 +17,10 @@ program
 let pathToRepository = path.resolve(process.cwd());
 
 // Check that I am in a git repository
-Repository.open(pathToRepository).catch(error => {
+Repository.open(pathToRepository).then(repository => {
+  repository.getCurrentBranch().then(branch => {
+    console.log(branch.shorthand());
+  })
+}).catch(error => {
   new ErrorHandler(ErrorEnum.NOT_A_GIT_REPOSITORY);
 });
