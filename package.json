@@ -27,7 +27,8 @@
   "homepage": "https://github.com/yoannfleurydev/gissue#readme",
   "dependencies": {
     "commander": "^2.11.0",
-    "nodegit": "^0.18.3"
+    "nodegit": "^0.18.3",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "@types/nodegit": "^0.18.0"

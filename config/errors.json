@@ -4,6 +4,11 @@
       "key": "NOT_A_GIT_REPOSITORY",
       "code": "000",
       "message": "This is not a git repository"
+    },
+    {
+      "key": "HTTP_REQUEST_FAILURE",
+      "code": "001",
+      "message": "The HTTP request failed"
     }
   ]
 }
