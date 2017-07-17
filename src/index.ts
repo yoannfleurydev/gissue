@@ -58,7 +58,7 @@ Repository.open(pathToRepository).then(repository => {
         let options = {
           url: `https://api.${match[2]}/repos/${match[3]}/issues/${issue}`,
           headers: {
-            'User-Agent': 'gissue'
+            'User-Agent': `gissue/${VERSION}`
           }
         };
 
