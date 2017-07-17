@@ -6,7 +6,6 @@ import { Issue              } from './body/Issue';
 import path    = require('path');
 import program = require('commander');
 import request = require('request');
-import blessed = require('blessed');
 
 const version = require('../package.json').version;
 
