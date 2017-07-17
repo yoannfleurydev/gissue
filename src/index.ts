@@ -23,11 +23,17 @@ let pathToRepository: string = path.resolve(process.cwd());
 
 let branchRegexp: RegExp = new RegExp(CONFIGFILE.branchRegexp);
 let issueMatching: number = CONFIGFILE.issueMatching;
+let ignore: Array<string> = CONFIGFILE.ignore;
 let regexpRemote: RegExp = /(.*)@(.*):(.*)\.git/g;
 
 // Check that I am in a git repository
 Repository.open(pathToRepository).then(repository => {
   repository.getCurrentBranch().then(branch => {
+    if (ignore.includes(branch.shorthand())) {
+      console.log(`You're on branch ${branch.shorthand()} which is ignored. Check your config file if this behavior is not expected.`);
+      process.exit();
+    }
+
     let branchMatch = branchRegexp.exec(branch.shorthand());
 
     if (!branchMatch) {
