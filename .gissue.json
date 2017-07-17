@@ -1,0 +1,9 @@
+{
+  "provider": "GITHUB",
+  "branchRegexp": "(feat|fix)-(\\d+)",
+  "issueMatching": 2,
+  "ignore": [
+    "master",
+    "develop"
+  ]
+}

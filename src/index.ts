@@ -7,11 +7,13 @@ import path    = require('path');
 import program = require('commander');
 import request = require('request');
 
-const version = require('../package.json').version;
+const VERSION = require('../package.json').version;
+const CONFIGFILENAME = '.gissue.json';
+const CONFIGFILE = require(`${process.cwd()}/${CONFIGFILENAME}`);
 
 // Arguments
 program
-  .version(version)
+  .version(VERSION)
   .option('-c, --config [path]', 'Define the configuration file')
   .option('-t, --tracker [name]', 'Define the issue tracker')
   .option('-u, --url [url]', 'Define the URL to the issue tracker')
@@ -19,13 +21,29 @@ program
 
 let pathToRepository: string = path.resolve(process.cwd());
 
-let regexpBranch: RegExp = /(feat|fix)-(\d+)/g;
+let branchRegexp: RegExp = new RegExp(CONFIGFILE.branchRegexp);
+let issueMatching: number = CONFIGFILE.issueMatching;
 let regexpRemote: RegExp = /(.*)@(.*):(.*)\.git/g;
 
 // Check that I am in a git repository
 Repository.open(pathToRepository).then(repository => {
   repository.getCurrentBranch().then(branch => {
-    let issue = branch.shorthand().split("-")[1];  // TODO Get the issue from matcher REGEXP
+    let branchMatch = branchRegexp.exec(branch.shorthand());
+
+    if (!branchMatch) {
+      // TODO throw error regexp does not match
+    }
+
+    if (issueMatching > branchMatch.length - 1) {
+      // TODO throw error issueMatching not a valid regexp group
+    }
+
+    let issue = parseInt(branchMatch[issueMatching]);
+
+    if (issue === NaN) {
+      // TODO throw error matched group NaN
+    }
+    
 
     Remote.list(repository).then(remotes => {
       remotes.forEach(name => Remote.lookup(repository, name, null).then(remote => {
@@ -47,14 +65,11 @@ Repository.open(pathToRepository).then(repository => {
             console.log(`Title : ${issue.title}`);
             console.log(`-------------------------------------`)
             console.log(`Description : ${issue.body}`);
-          }
-          
+          } 
         })
       }));
     });
   });
-
-  
 }).catch(error => {
   new ErrorHandler(ErrorEnum.NOT_A_GIT_REPOSITORY);
 });

@@ -1,0 +1,11 @@
+{
+  "GITHUB": {
+    "name": "Github"
+  },
+  "GITLAB": {
+    "name": "Gitlab"
+  },
+  "REDMINE": {
+    "name": "Redmine"
+  }
+}
