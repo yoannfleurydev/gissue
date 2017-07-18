@@ -6,9 +6,15 @@ import { Issue              } from './body/Issue';
 import path    = require('path');
 import program = require('commander');
 import request = require('request');
+import fs      = require('fs');
 
 const VERSION = require('../package.json').version;
 const CONFIGFILENAME = '.gissue.json';
+
+if (!fs.existsSync(`${process.cwd()}/${CONFIGFILENAME}`)) {
+  // TODO throw error config file not found
+}
+
 const CONFIGFILE = require(`${process.cwd()}/${CONFIGFILENAME}`);
 
 // Arguments
