@@ -6,5 +6,6 @@ export class ErrorHandler {
   constructor(key: ErrorEnum) {
     let error = errors[key];
     console.error(error.message);
+    process.exit(parseInt(error.code));
   }
 }

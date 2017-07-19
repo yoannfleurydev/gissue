@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { Repository, Remote } from 'nodegit';
 import { ErrorEnum          } from './error/ErrorEnum';
 import { ErrorHandler       } from './error/ErrorHandler';
@@ -12,7 +14,7 @@ const VERSION = require('../package.json').version;
 const CONFIGFILENAME = '.gissue.json';
 
 if (!fs.existsSync(`${process.cwd()}/${CONFIGFILENAME}`)) {
-  // TODO throw error config file not found
+  throw new ErrorHandler(ErrorEnum.CONFIG_FILE_NOT_FOUND);
 }
 
 const CONFIGFILE = require(`${process.cwd()}/${CONFIGFILENAME}`);

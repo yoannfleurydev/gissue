@@ -9,6 +9,11 @@
       "key": "HTTP_REQUEST_FAILURE",
       "code": "001",
       "message": "The HTTP request failed"
+    },
+    {
+      "key": "CONFIG_FILE_NOT_FOUND",
+      "code": "002",
+      "message": "The configuration file cannot be found"
     }
   ]
 }
