@@ -5,19 +5,15 @@ import { ErrorEnum          } from './error/ErrorEnum';
 import { ErrorHandler       } from './error/ErrorHandler';
 import { Issue              } from './body/Issue';
 
+import { getProvider      } from './provider/Providers';
+import { getConfiguration } from './configuration/Configuration';
+
 import path    = require('path');
 import program = require('commander');
 import request = require('request');
-import fs      = require('fs');
 
 const VERSION = require('../package.json').version;
-const CONFIGFILENAME = '.gissue.json';
-
-if (!fs.existsSync(`${process.cwd()}/${CONFIGFILENAME}`)) {
-  throw new ErrorHandler(ErrorEnum.CONFIG_FILE_NOT_FOUND);
-}
-
-const CONFIGFILE = require(`${process.cwd()}/${CONFIGFILENAME}`);
+const CONFIGFILE = getConfiguration();
 
 // Arguments
 program
@@ -78,8 +74,10 @@ Repository.open(pathToRepository).then(repository => {
             console.log(`=====================================`)
             console.log(`Title : ${issue.title}`);
             console.log(`-------------------------------------`)
-            console.log(`Description : ${issue.body}`);
-          } 
+            console.log(
+              `Description : \n${issue.body}`
+            );
+          }
         })
       }));
     });

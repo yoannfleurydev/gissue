@@ -2,14 +2,13 @@
   "GITHUB": {
     "name": "Github",
     "hostname": "github.com",
-    "issue": "https://api.github.com/repos/:repo/issues/:issue"
+    "api": "api.github.com",
+    "issue": "/repos/:repo/issues/:issue"
   },
   "GITLAB": {
     "name": "Gitlab",
     "hostname": "gitlab.com",
-    "issue": "https://gitlab.com/api/v4/projects/:repo/issues/:issue"
-  },
-  "REDMINE": {
-    "name": "Redmine"
+    "api": "gitlab.com",
+    "issue": "/api/v4/projects/:repo/issues/:issue"
   }
 }
