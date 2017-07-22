@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var nodegit_1 = require("nodegit");
 var ErrorHandler_1 = require("./error/ErrorHandler");
+var Issue_1 = require("./body/Issue");
 var Configuration_1 = require("./configuration/Configuration");
 var path = require("path");
 var program = require("commander");
@@ -17,21 +18,19 @@ program
     .parse(process.argv);
 var pathToRepository = path.resolve(process.cwd());
 var branchRegexp = new RegExp(CONFIGFILE.branchRegexp);
-var issueMatching = CONFIGFILE.issueMatching;
-var ignore = CONFIGFILE.ignore;
 var regexpRemote = /(.*)@(.*):(.*)\.git/g;
 nodegit_1.Repository.open(pathToRepository).then(function (repository) {
     repository.getCurrentBranch().then(function (branch) {
-        if (ignore.includes(branch.shorthand())) {
+        if (CONFIGFILE.ignore.includes(branch.shorthand())) {
             console.log("You're on branch " + branch.shorthand() + " which is ignored. Check your config file if this behavior is not expected.");
             process.exit();
         }
         var branchMatch = branchRegexp.exec(branch.shorthand());
         if (!branchMatch) {
         }
-        if (issueMatching > branchMatch.length - 1) {
+        if (CONFIGFILE.issueMatching > branchMatch.length) {
         }
-        var issue = parseInt(branchMatch[issueMatching]);
+        var issue = parseInt(branchMatch[CONFIGFILE.issueMatching]);
         if (issue === NaN) {
         }
         nodegit_1.Remote.list(repository).then(function (remotes) {
@@ -49,10 +48,7 @@ nodegit_1.Repository.open(pathToRepository).then(function (repository) {
                     }
                     else {
                         var issue_1 = JSON.parse(body);
-                        console.log("=====================================");
-                        console.log("Title : " + issue_1.title);
-                        console.log("-------------------------------------");
-                        console.log("Description : \n" + issue_1.body);
+                        console.log(Issue_1.printIssue(issue_1));
                     }
                 });
             }); });

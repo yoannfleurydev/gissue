@@ -6,4 +6,9 @@ var Issue = (function () {
     return Issue;
 }());
 exports.Issue = Issue;
+function printIssue(issue) {
+    var delimiter = '+-----------------------------------------------------+';
+    return delimiter + "\n" + issue.title + "\n" + delimiter + "\n" + issue.body;
+}
+exports.printIssue = printIssue;
 //# sourceMappingURL=Issue.js.map

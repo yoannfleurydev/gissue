@@ -1,7 +1,7 @@
 import { ErrorHandler } from '../error/ErrorHandler';
 import { ErrorEnum } from '../error/ErrorEnum';
 
-import fs      = require('fs');
+import fs = require('fs');
 
 const CONFIGFILENAME = '.gissue.json';
 
