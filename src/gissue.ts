@@ -58,19 +58,17 @@ Repository.open(pathToRepository).then(repository => {
         let provider = getProvider(CONFIGFILE.provider);
         provider.hostname = match[2];
 
-        console.log(getIssueURL(provider, match[3], issue));
-
         let options = {
           url: getIssueURL(provider, match[3], issue),
           headers: {
-            'User-Agent': `gissue/${VERSION}`
+            'User-Agent': `gissue/${VERSION}`,
+            'PRIVATE-TOKEN': CONFIGFILE.token
           }
         };
 
-
-
         request(options, (error, response, body) => {
           if (error) {
+            console.error(error);
             new ErrorHandler(ErrorEnum.HTTP_REQUEST_FAILURE);
           } else {
             let issue: Issue = JSON.parse(body);

@@ -10,6 +10,7 @@ export class Configuration {
   public branchRegexp: string;
   public issueMatching: number;
   public ignore: Array<string>;
+  public token: string;
 }
 
 export function getConfiguration(): Configuration {
