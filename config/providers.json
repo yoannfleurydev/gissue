@@ -2,13 +2,15 @@
   "GITHUB": {
     "name": "Github",
     "hostname": "github.com",
-    "api": "api.github.com",
-    "issue": "/repos/:repo/issues/:issue"
+    "subdomain": "api.",
+    "issue": "/repos/:repo/issues/:issue",
+    "urlEncodeRepo": false
   },
   "GITLAB": {
     "name": "Gitlab",
     "hostname": "gitlab.com",
-    "api": "gitlab.com",
-    "issue": "/api/v4/projects/:repo/issues/:issue"
+    "subdomain": "",
+    "issue": "/api/v4/projects/:repo/issues/:issue",
+    "urlEncodeRepo": true
   }
 }

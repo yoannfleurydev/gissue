@@ -5,8 +5,8 @@ import { ErrorEnum          } from './error/ErrorEnum';
 import { ErrorHandler       } from './error/ErrorHandler';
 import { Issue, printIssue  } from './body/Issue';
 
-import { getProvider      } from './provider/Providers';
-import { getConfiguration } from './configuration/Configuration';
+import { getProvider, getIssueURL } from './provider/Providers';
+import { getConfiguration         } from './configuration/Configuration';
 
 import path    = require('path');
 import program = require('commander');
@@ -55,12 +55,19 @@ Repository.open(pathToRepository).then(repository => {
       remotes.forEach(name => Remote.lookup(repository, name, null).then(remote => {
         let match = regexpRemote.exec(remote.url());
 
+        let provider = getProvider(CONFIGFILE.provider);
+        provider.hostname = match[2];
+
+        console.log(getIssueURL(provider, match[3], issue));
+
         let options = {
-          url: `https://api.${match[2]}/repos/${match[3]}/issues/${issue}`,
+          url: getIssueURL(provider, match[3], issue),
           headers: {
             'User-Agent': `gissue/${VERSION}`
           }
         };
+
+
 
         request(options, (error, response, body) => {
           if (error) {
