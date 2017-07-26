@@ -14,4 +14,15 @@ function getProvider(provider) {
     return this.getProviders()[provider];
 }
 exports.getProvider = getProvider;
+function getIssueURL(provider, project, issue) {
+    var projectIdentifier = project;
+    if (provider.urlEncodeRepo) {
+        projectIdentifier = encodeURIComponent(project);
+    }
+    var path = provider.issue
+        .replace(':repo', projectIdentifier)
+        .replace(':issue', issue.toString());
+    return 'https://' + provider.subdomain + provider.hostname + path;
+}
+exports.getIssueURL = getIssueURL;
 //# sourceMappingURL=Providers.js.map

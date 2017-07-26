@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var nodegit_1 = require("nodegit");
 var ErrorHandler_1 = require("./error/ErrorHandler");
 var Issue_1 = require("./body/Issue");
+var Providers_1 = require("./provider/Providers");
 var Configuration_1 = require("./configuration/Configuration");
 var path = require("path");
 var program = require("commander");
@@ -36,14 +37,18 @@ nodegit_1.Repository.open(pathToRepository).then(function (repository) {
         nodegit_1.Remote.list(repository).then(function (remotes) {
             remotes.forEach(function (name) { return nodegit_1.Remote.lookup(repository, name, null).then(function (remote) {
                 var match = regexpRemote.exec(remote.url());
+                var provider = Providers_1.getProvider(CONFIGFILE.provider);
+                provider.hostname = match[2];
                 var options = {
-                    url: "https://api." + match[2] + "/repos/" + match[3] + "/issues/" + issue,
+                    url: Providers_1.getIssueURL(provider, match[3], issue),
                     headers: {
-                        'User-Agent': "gissue/" + VERSION
+                        'User-Agent': "gissue/" + VERSION,
+                        'PRIVATE-TOKEN': CONFIGFILE.token
                     }
                 };
                 request(options, function (error, response, body) {
                     if (error) {
+                        console.error(error);
                         new ErrorHandler_1.ErrorHandler(1);
                     }
                     else {
