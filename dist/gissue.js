@@ -6,9 +6,9 @@ var ErrorHandler_1 = require("./error/ErrorHandler");
 var Issue_1 = require("./body/Issue");
 var Providers_1 = require("./provider/Providers");
 var Configuration_1 = require("./configuration/Configuration");
-var path = require("path");
-var program = require("commander");
-var request = require("request");
+var path = require('path');
+var program = require('commander');
+var request = require('request');
 var VERSION = require('../package.json').version;
 var CONFIGFILE = Configuration_1.getConfiguration();
 program
