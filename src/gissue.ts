@@ -8,9 +8,9 @@ import { Issue, printIssue  } from './body/Issue';
 import { getProvider, getIssueURL } from './provider/Providers';
 import { getConfiguration         } from './configuration/Configuration';
 
-import path    = require('path');
-import program = require('commander');
-import request = require('request');
+const path    = require('path');
+const program = require('commander');
+const request = require('request');
 
 const VERSION = require('../package.json').version;
 const CONFIGFILE = getConfiguration();
